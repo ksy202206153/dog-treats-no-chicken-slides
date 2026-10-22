@@ -8,17 +8,19 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg-deep: #060a12;
-      --bg-slide: #0b1120;
-      --bg-card: rgba(17, 24, 39, 0.86);
-      --border: rgba(148, 163, 184, 0.18);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --cyan: #38bdf8;
-      --emerald: #34d399;
-      --amber: #fbbf24;
-      --purple: #c084fc;
-      --rose: #fb7185;
+      --bg-deep: #f1f5f9;
+      --bg-slide: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-soft: #f1f5f9;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --body: #334155;
+      --muted: #64748b;
+      --cyan: #0284c7;
+      --emerald: #059669;
+      --amber: #d97706;
+      --purple: #7c3aed;
+      --rose: #e11d48;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -37,9 +39,10 @@
       left: 0;
       right: 0;
       height: 54px;
-      background: rgba(6, 10, 18, 0.88);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -52,7 +55,7 @@
       gap: 10px;
       font-weight: 800;
       font-size: 14.5px;
-      color: #e2e8f0;
+      color: var(--text);
     }
     .brand-pill {
       background: linear-gradient(90deg, #0284c7, #2563eb);
@@ -72,18 +75,22 @@
       height: 26px;
       border-radius: 6px;
       border: 1px solid var(--border);
-      background: rgba(30, 41, 59, 0.6);
+      background: #f8fafc;
       color: var(--muted);
       font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
     }
+    .dot-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
     .dot-btn.active {
       background: var(--cyan);
-      color: #060a12;
+      color: #ffffff;
       border-color: var(--cyan);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
     }
     .nav-actions {
       display: flex;
@@ -91,9 +98,9 @@
       align-items: center;
     }
     .ctrl-btn {
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid var(--border);
-      color: #e2e8f0;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: var(--text);
       padding: 6px 12px;
       border-radius: 8px;
       font-size: 12.5px;
@@ -101,10 +108,12 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.2s;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
     }
     .ctrl-btn:hover {
       border-color: var(--cyan);
       color: var(--cyan);
+      background: #f0f9ff;
     }
     .progress-track {
       position: fixed;
@@ -112,7 +121,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: rgba(30, 41, 59, 0.7);
+      background: #e2e8f0;
       z-index: 101;
     }
     .progress-fill {
@@ -137,8 +146,8 @@
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      background: radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.08), transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(168, 85, 247, 0.08), transparent 45%),
+      background: radial-gradient(circle at 85% 15%, rgba(2, 132, 199, 0.07), transparent 45%),
+                  radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.07), transparent 45%),
                   var(--bg-slide);
       overflow-y: auto;
     }
@@ -161,6 +170,7 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.22;
+      color: var(--text);
     }
     .slide-sub {
       font-size: 14px;
@@ -197,14 +207,14 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
       overflow: hidden;
     }
     .panel h3 {
       font-size: 16.5px;
       font-weight: 800;
       margin-bottom: 8px;
-      color: #f1f5f9;
+      color: var(--text);
     }
     .img-frame {
       width: 100%;
@@ -212,8 +222,8 @@
       max-height: 450px;
       object-fit: contain;
       border-radius: 12px;
-      background: #070b14;
-      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: #ffffff;
+      border: 1px solid var(--border);
     }
     .cover-hero {
       position: relative;
@@ -222,8 +232,9 @@
       flex: 1;
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      border: 1px solid rgba(56, 189, 248, 0.28);
-      background: #090e1a;
+      border: 1px solid #bae6fd;
+      background: #ffffff;
+      box-shadow: 0 12px 32px rgba(2, 132, 199, 0.08);
     }
     .cover-img {
       width: 100%;
@@ -237,7 +248,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 18px;
-      background: linear-gradient(90deg, rgba(9, 14, 26, 0.92), rgba(11, 17, 32, 0.98));
+      background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
     }
     .kpi-row {
       display: grid;
@@ -246,10 +257,11 @@
       margin-top: 10px;
     }
     .kpi-box {
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
       border-radius: 12px;
       padding: 14px 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
     }
     .kpi-num {
       font-size: 26px;
@@ -260,38 +272,49 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 2px;
+      font-weight: 600;
     }
     .formula-box {
-      background: #050811;
-      border: 1.5px solid #38bdf8;
+      background: #f0f9ff;
+      border: 1.5px solid #0284c7;
       border-radius: 14px;
       padding: 18px 22px;
       font-family: 'Cambria Math', 'Consolas', monospace;
-      color: #e0f2fe;
+      color: #0f172a;
       font-size: 16.5px;
-      box-shadow: 0 0 24px rgba(56, 189, 248, 0.15);
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.1);
       margin-bottom: 14px;
     }
     .badge {
       display: inline-block;
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 6px;
       font-size: 11.5px;
-      font-weight: 700;
+      font-weight: 800;
     }
-    .b-cyan { background: rgba(56, 189, 248, 0.16); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.35); }
-    .b-emerald { background: rgba(52, 211, 153, 0.16); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.35); }
-    .b-amber { background: rgba(251, 191, 36, 0.16); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.35); }
-    .b-purple { background: rgba(192, 132, 252, 0.16); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.35); }
+    .b-cyan { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+    .b-emerald { background: #d1fae5; color: #047857; border: 1px solid #6ee7b7; }
+    .b-amber { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+    .b-purple { background: #f3e8ff; color: #6d28d9; border: 1px solid #d8b4fe; }
+    .b-rose { background: #ffe4e6; color: #be123c; border: 1px solid #fda4af; }
+
+    .sub-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: var(--body);
+    }
 
     .slide-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 12px;
-      color: #64748b;
+      color: var(--muted);
       padding-top: 12px;
-      border-top: 1px solid rgba(148, 163, 184, 0.1);
+      border-top: 1px solid var(--border);
       margin-top: 12px;
     }
     /* Slide 9 Live Explorer Table */
@@ -300,7 +323,8 @@
       overflow-y: auto;
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: rgba(15, 23, 42, 0.75);
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
       user-select: text;
     }
     table.exp-tbl {
@@ -311,20 +335,21 @@
     table.exp-tbl th {
       position: sticky;
       top: 0;
-      background: #1e293b;
-      color: #e2e8f0;
+      background: #f1f5f9;
+      color: #0f172a;
       padding: 10px 12px;
       text-align: left;
-      font-weight: 700;
+      font-weight: 800;
+      border-bottom: 1px solid #cbd5e1;
       z-index: 2;
     }
     table.exp-tbl td {
       padding: 9px 12px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-      color: #cbd5e1;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
     }
     table.exp-tbl tr:hover td {
-      background: rgba(56, 189, 248, 0.07);
+      background: #f0f9ff;
     }
     .filter-row {
       display: flex;
@@ -332,12 +357,20 @@
       margin-bottom: 10px;
     }
     .filter-row select, .filter-row input {
-      background: #0f172a;
-      color: #f8fafc;
-      border: 1px solid var(--border);
-      padding: 7px 12px;
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
       border-radius: 8px;
       font-size: 12.5px;
+      font-weight: 600;
+    }
+    code {
+      background: #e2e8f0;
+      color: #0f172a;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.92em;
     }
   </style>
 </head>
@@ -352,7 +385,7 @@
     <div class="slide-dots" id="slideDots"></div>
     <div class="nav-actions">
       <button class="ctrl-btn" id="prevBtn">◀ 이전</button>
-      <span id="slideCounter" style="font-size:12.5px;font-weight:800;color:#94a3b8;min-width:52px;text-align:center;">1 / 10</span>
+      <span id="slideCounter" style="font-size:12.5px;font-weight:800;color:#475569;min-width:52px;text-align:center;">1 / 10</span>
       <button class="ctrl-btn" id="nextBtn">다음 ▶</button>
       <a class="ctrl-btn" href="dog_treats_dashboard.html" target="_blank">📊 웹 대시보드</a>
       <a class="ctrl-btn" href="dog_treats_no_chicken_candidates.csv" download>📥 CSV 다운로드</a>
@@ -372,12 +405,12 @@
             <span class="badge b-cyan anim-item">k-skill 쇼핑 표면 실측 데이터 리포트</span>
             <span class="badge b-emerald anim-item" style="margin-left:6px;">Anime.js · Manim · Matplotlib</span>
           </div>
-          <h1 class="anim-item" style="font-size:36px;font-weight:900;line-height:1.2;letter-spacing:-0.02em;">
+          <h1 class="anim-item" style="font-size:36px;font-weight:900;line-height:1.2;letter-spacing:-0.02em;color:#0f172a;">
             5kg 소형견 맞춤<br/>
             <span style="color:var(--cyan);">닭 알러지 ZERO</span> 간식<br/>
             가성비 × 인기도 30종 분석
           </h1>
-          <p class="anim-item" style="color:#cbd5e1;font-size:14.5px;line-height:1.6;">
+          <p class="anim-item" style="color:var(--body);font-size:14.5px;line-height:1.65;">
             다나와 가격비교(<code>danawa-price-search</code>)와 마켓컬리(<code>market-kurly-search</code>)에서 수집한 314개 초기 후보 중 계육·사사미·닭근위를 완전히 배제하고, <strong>5kg 소형견의 구강 크기·소화력·10g당 가성비·리뷰 인기도</strong>를 정량 평가한 인터랙티브 슬라이드 덱입니다.
           </p>
           <div class="kpi-row anim-item">
@@ -401,7 +434,7 @@
         </div>
       </div>
       <div class="slide-footer">
-        <span>Slide 01 · Executive Cover (Google Flow Studio Asset + Anime.js Stagger)</span>
+        <span>Slide 01 · Executive Cover (Bright Light Theme + Anime.js Stagger)</span>
         <span>키보드 ← / → 또는 상단 버튼으로 슬라이드를 이동하세요</span>
       </div>
     </section>
@@ -418,24 +451,24 @@
           <div>
             <span class="badge b-amber">핵심 발견 1 · '사사미(Sasami)' 함정</span>
             <h3 style="margin-top:10px;font-size:20px;">상품명은 '오리스틱'이지만 주원료는 닭가슴살?</h3>
-            <p style="color:#cbd5e1;font-size:14px;margin-top:8px;line-height:1.65;">
+            <p style="color:var(--body);font-size:14px;margin-top:8px;line-height:1.65;">
               다나와·오픈마켓 검색 시 상위권에 노출되는 <code>사사미 오리스틱</code>, <code>사사미 고구마말이</code> 등 다수 제품은 일본어 <strong>사사미(ささみ = 닭가슴살/안심)</strong>를 베이스로 제조됩니다. 5kg 소형견은 미량의 계육 단백질에도 눈물자국·외이염·발사탕 증상이 발현되므로 <strong>금칙어 정규식 필터</strong>로 전량 차단했습니다.
             </p>
-            <div style="margin-top:18px;background:#070b14;border:1px solid var(--border);border-radius:12px;padding:16px;">
-              <div style="font-size:12.5px;color:var(--cyan);font-weight:800;margin-bottom:8px;">🚫 자동 차단된 닭 알러지 위험 키워드 (14종)</div>
+            <div class="sub-card" style="margin-top:18px;padding:16px;">
+              <div style="font-size:12.5px;color:var(--rose);font-weight:800;margin-bottom:8px;">🚫 자동 차단된 닭 알러지 위험 키워드 (14종)</div>
               <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">닭고기</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">치킨</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">계육</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">사사미(닭안심)</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">닭가슴살</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">닭근위(모래집)</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">닭발/오돌뼈</span>
-                <span class="badge" style="background:#3f1d2e;color:#fda4af;">치즈닭</span>
+                <span class="badge b-rose">닭고기</span>
+                <span class="badge b-rose">치킨</span>
+                <span class="badge b-rose">계육</span>
+                <span class="badge b-rose">사사미(닭안심)</span>
+                <span class="badge b-rose">닭가슴살</span>
+                <span class="badge b-rose">닭근위(모래집)</span>
+                <span class="badge b-rose">닭발/오돌뼈</span>
+                <span class="badge b-rose">치즈닭</span>
               </div>
             </div>
           </div>
-          <div style="border-top:1px solid var(--border);padding-top:14px;font-size:13px;color:var(--emerald);font-weight:700;">
+          <div style="border-top:1px solid var(--border);padding-top:14px;font-size:13px;color:var(--emerald);font-weight:800;">
             ✔ 해결책: 단일원물 100%(황태·연어·오리·한우·말·고구마) 및 가수분해 단백질 중심 큐레이션
           </div>
         </div>
@@ -444,34 +477,34 @@
           <h3>3단계 데이터 필터링 퍼널 (Anime.js Funnel Bars)</h3>
           <div style="display:flex;flex-direction:column;gap:16px;margin-top:6px;">
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--body);">
                 <span><strong>Stage 1.</strong> 다나와(60종) + 마켓컬리(254종) 원시 수집</span>
                 <strong style="color:var(--cyan);">314종 (100%)</strong>
               </div>
-              <div style="height:22px;background:#1e293b;border-radius:8px;overflow:hidden;">
+              <div style="height:22px;background:#e2e8f0;border-radius:8px;overflow:hidden;">
                 <div class="funnel-bar" data-width="100%" style="width:0%;height:100%;background:linear-gradient(90deg,#0284c7,#38bdf8);"></div>
               </div>
             </div>
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--body);">
                 <span><strong>Stage 2.</strong> 계육·사사미·비간식(패드/사료/고양이전용) 배제</span>
                 <strong style="color:var(--purple);">98종 (31.2%)</strong>
               </div>
-              <div style="height:22px;background:#1e293b;border-radius:8px;overflow:hidden;">
-                <div class="funnel-bar" data-width="31.2%" style="width:0%;height:100%;background:linear-gradient(90deg,#7c3aed,#c084fc);"></div>
+              <div style="height:22px;background:#e2e8f0;border-radius:8px;overflow:hidden;">
+                <div class="funnel-bar" data-width="31.2%" style="width:0%;height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);"></div>
               </div>
             </div>
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--body);">
                 <span><strong>Stage 3.</strong> 5kg 소형견 식감·크기 & 가성비·인기도 상위 엄선</span>
                 <strong style="color:var(--emerald);">30종 (최종 후보)</strong>
               </div>
-              <div style="height:22px;background:#1e293b;border-radius:8px;overflow:hidden;">
-                <div class="funnel-bar" data-width="15%" style="width:0%;height:100%;background:linear-gradient(90deg,#059669,#34d399);"></div>
+              <div style="height:22px;background:#e2e8f0;border-radius:8px;overflow:hidden;">
+                <div class="funnel-bar" data-width="15%" style="width:0%;height:100%;background:linear-gradient(90deg,#059669,#10b981);"></div>
               </div>
             </div>
           </div>
-          <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:14px;font-size:13px;color:#d1fae5;">
+          <div style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:12px;padding:14px;font-size:13px;color:#065f46;">
             <strong>안전등급 분류 결과</strong>: 30종 중 <strong>28종(93.3%)</strong>이 <code>[안심]</code> 등급(단일원물 100%, 가수분해, 식물성/무계육)이며, 2종(초저가 성형육)은 <code>[성분표확인권장]</code> 대조군으로 분리했습니다.
           </div>
         </div>
@@ -495,20 +528,20 @@
             <span class="badge b-cyan">Manim Mathematical Formulation</span>
             <h3 style="margin-top:10px;">3축 가중치 스코어링 방정식</h3>
             <div class="formula-box" style="margin-top:10px;">
-              S<sub>total</sub>(i) = <span style="color:#34d399;">S<sub>safety</sub>(i)</span> + <span style="color:#38bdf8;">S<sub>pop</sub>(i)</span> + <span style="color:#fbbf24;">S<sub>value</sub>(i)</span> &nbsp;∈ [0, 100]
+              S<sub>total</sub>(i) = <span style="color:#059669;">S<sub>safety</sub>(i)</span> + <span style="color:#0284c7;">S<sub>pop</sub>(i)</span> + <span style="color:#d97706;">S<sub>value</sub>(i)</span> &nbsp;∈ [0, 100]
             </div>
-            <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:#cbd5e1;">
-              <li style="background:#070b14;padding:11px 14px;border-radius:10px;border-left:4px solid #34d399;">
-                <strong style="color:#34d399;">① 알러지 안전성 점수 S<sub>safety</sub> (35점 만점)</strong><br/>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:var(--body);">
+              <li class="sub-card" style="border-left:4px solid #059669;">
+                <strong style="color:#059669;">① 알러지 안전성 점수 S<sub>safety</sub> (35점 만점)</strong><br/>
                 단일원물 100% · 가수분해 단백질 · 식물성 원료 = <strong>35점</strong>, 무계육 복합원료 = <strong>30점</strong>, 초저가 성형 배합육(성분표 확인 권장) = <strong>15점</strong>
               </li>
-              <li style="background:#070b14;padding:11px 14px;border-radius:10px;border-left:4px solid #38bdf8;">
-                <strong style="color:#38bdf8;">② 로그 리뷰 인기도 점수 S<sub>pop</sub> (35점 만점)</strong><br/>
+              <li class="sub-card" style="border-left:4px solid #0284c7;">
+                <strong style="color:#0284c7;">② 로그 리뷰 인기도 점수 S<sub>pop</sub> (35점 만점)</strong><br/>
                 <code>S<sub>pop</sub> = 35 × log<sub>10</sub>(Reviews + 1) / log<sub>10</sub>(10,001)</code><br/>
                 극단적 베스트셀러(9,999+건)의 독식을 방지하고 100~1,000건 구간의 변별력을 확보
               </li>
-              <li style="background:#070b14;padding:11px 14px;border-radius:10px;border-left:4px solid #fbbf24;">
-                <strong style="color:#fbbf24;">③ 10g당 환산 가성비 점수 S<sub>value</sub> (30점 만점)</strong><br/>
+              <li class="sub-card" style="border-left:4px solid #d97706;">
+                <strong style="color:#d97706;">③ 10g당 환산 가성비 점수 S<sub>value</sub> (30점 만점)</strong><br/>
                 <code>P<sub>10g</sub> = Price / (Weight_g / 10)</code> 산출 후 로그 역정규화 적용 (낮은 단가일수록 만점 수렴)
               </li>
             </ul>
@@ -519,14 +552,14 @@
         </div>
         <div class="panel anim-item" style="align-items:center;justify-content:center;">
           <img src="assets/charts/manim_scoring_animation.gif" alt="Manim Vector Space Transform Animation" class="img-frame" />
-          <div style="margin-top:8px;font-size:12.5px;color:var(--cyan);font-weight:700;">
+          <div style="margin-top:8px;font-size:12.5px;color:var(--cyan);font-weight:800;">
             ▲ Manim Vector Transform: 원시 (가격·중량) → 정규화 (S_value, S_pop) 좌표 변환
           </div>
         </div>
       </div>
       <div class="slide-footer">
         <span>Slide 03 · Mathematical Modeling & Manim Coordinate Animation</span>
-        <span>Engine: Manim Dark Vector Style + Matplotlib FuncAnimation</span>
+        <span>Engine: Manim Light Vector Style + Matplotlib FuncAnimation</span>
       </div>
     </section>
 
@@ -546,20 +579,20 @@
             <span class="badge b-emerald">핵심 통계 인사이트</span>
             <h3 style="margin-top:10px;">용량의 착시를 걷어낸 실질 가성비 순위</h3>
             <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;font-size:13.2px;">
-              <div style="background:#070b14;padding:10px 14px;border-radius:10px;border:1px solid var(--border);">
-                <strong style="color:#38bdf8;">1위 오리고기 그룹 (중앙값 275원/10g)</strong><br/>
+              <div class="sub-card">
+                <strong style="color:#0284c7;">1위 오리고기 그룹 (중앙값 275원/10g)</strong><br/>
                 마마쇼 1kg(108원/10g), 펫더맨 300g(73원/10g), 채널펫 300g(312원/10g) 등 대용량·중용량 가성비와 기호성을 동시에 충족합니다.
               </div>
-              <div style="background:#070b14;padding:10px 14px;border-radius:10px;border:1px solid var(--border);">
-                <strong style="color:#34d399;">2위 덴탈/천연껌 그룹 (중앙값 340원/10g)</strong><br/>
+              <div class="sub-card">
+                <strong style="color:#059669;">2위 덴탈/천연껌 그룹 (중앙값 340원/10g)</strong><br/>
                 빈즈라이크 오리목뼈 500g(240원/10g), 몰리스 오리꽈배기껌 300g(317원/10g), 무마진 가수분해 덴탈껌(363원/10g)으로 데일리 급여 부담이 낮습니다.
               </div>
-              <div style="background:#070b14;padding:10px 14px;border-radius:10px;border:1px solid var(--border);">
-                <strong style="color:#a78bfa;">3위 어류(황태·연어) 그룹 (중앙값 397원/10g)</strong><br/>
+              <div class="sub-card">
+                <strong style="color:#7c3aed;">3위 어류(황태·연어) 그룹 (중앙값 397원/10g)</strong><br/>
                 벨버드 황태큐브 1kg은 <strong>10g당 152원(무료배송)</strong>으로 단일원물 100% 중 최고 효율을 기록했습니다.
               </div>
-              <div style="background:#070b14;padding:10px 14px;border-radius:10px;border:1px solid var(--border);">
-                <strong style="color:#f87171;">4~5위 식물성(649원) & 적색육(1,125원/10g)</strong><br/>
+              <div class="sub-card">
+                <strong style="color:#e11d48;">4~5위 식물성(649원) & 적색육(1,125원/10g)</strong><br/>
                 23g~50g 소포장 위주라 1회 구매가는 <strong>2,500~5,400원</strong>으로 가장 낮아 첫 알러지 테스트용으로 최적입니다.
               </div>
             </div>
@@ -569,7 +602,7 @@
       </div>
       <div class="slide-footer">
         <span>Slide 04 · Protein Group Cost Efficiency</span>
-        <span>Chart: Matplotlib High-DPI Dark Theme Bar Plot</span>
+        <span>Chart: Matplotlib High-DPI Light Theme Bar Plot</span>
       </div>
     </section>
 
@@ -589,29 +622,29 @@
             <span class="badge b-cyan">Quadrant Analysis</span>
             <h3 style="margin-top:10px;">Sweet-Spot 핵심 후보 5선</h3>
             <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;font-size:13px;">
-              <div style="background:#070b14;padding:10px 12px;border-radius:10px;border-left:4px solid #fb923c;">
+              <div class="sub-card" style="border-left:4px solid #ea580c;">
                 <strong>#8 채널펫 고구마 오리말이 300g</strong><br/>
                 10g당 312원 · 리뷰 999+건 · ★4.9 (종합 1위, 85.4점)
               </div>
-              <div style="background:#070b14;padding:10px 12px;border-radius:10px;border-left:4px solid #38bdf8;">
+              <div class="sub-card" style="border-left:4px solid #0284c7;">
                 <strong>#1 벨버드 시간순삭 황태 큐브 1kg</strong><br/>
                 10g당 152원(무료배송) · 리뷰 719건 · 황태 100% (종합 2위, 83.1점)
               </div>
-              <div style="background:#070b14;padding:10px 12px;border-radius:10px;border-left:4px solid #4ade80;">
+              <div class="sub-card" style="border-left:4px solid #059669;">
                 <strong>#25 헬로도기 그대로 말랑 고구마스틱 250g</strong><br/>
                 10g당 100원 · 리뷰 415건 · 고구마 100% (종합 3위, 82.4점)
               </div>
-              <div style="background:#070b14;padding:10px 12px;border-radius:10px;border-left:4px solid #fb923c;">
+              <div class="sub-card" style="border-left:4px solid #ea580c;">
                 <strong>#11 펫더맨 리얼 오리 연어포 300g</strong><br/>
                 10g당 73원 · 리뷰 173건 · 오리+연어 (종합 5위, 78.8점)
               </div>
-              <div style="background:#070b14;padding:10px 12px;border-radius:10px;border-left:4px solid #c084fc;">
+              <div class="sub-card" style="border-left:4px solid #7c3aed;">
                 <strong>#14 빈즈라이크 깨끗한 오리목뼈 500g</strong><br/>
                 10g당 240원 · 리뷰 240건 · ★5.0 만점 (종합 7위, 76.1점)
               </div>
             </div>
           </div>
-          <div style="font-size:12.5px;color:#93c5fd;background:rgba(56,189,248,0.1);padding:10px;border-radius:8px;">
+          <div style="font-size:12.5px;color:#0369a1;background:#e0f2fe;border:1px solid #bae6fd;padding:10px;border-radius:8px;font-weight:600;">
             💡 우측 상단 군집(복슬강아지 오리안심·말져키, 골드로니 한우간)은 소포장 수제간식으로 <strong>기호성·신선도 최상위 프리미엄군</strong>을 형성합니다.
           </div>
         </div>
@@ -636,23 +669,23 @@
         <div class="panel anim-item">
           <div>
             <span class="badge b-purple">2-Step Smart Strategy</span>
-            <h3 style="margin-top:10px;">알러지견 보호자를 위한 간식비 72% 절감 로드맵</h3>
+            <h3 style="margin-top:10px;">알러지견 보호자를 위한 간식비 79% 절감 로드맵</h3>
             <div style="margin-top:14px;display:flex;flex-direction:column;gap:14px;">
-              <div style="background:#070b14;border:1px solid rgba(168,85,247,0.4);border-radius:12px;padding:14px;">
+              <div style="background:#faf5ff;border:1px solid #d8b4fe;border-radius:12px;padding:14px;">
                 <div style="color:var(--purple);font-weight:800;font-size:14px;margin-bottom:4px;">STEP 1 · 마켓컬리 소포장(23~50g)으로 알러지·기호성 테스트</div>
-                <p style="font-size:13px;color:#cbd5e1;">
+                <p style="font-size:13px;color:var(--body);line-height:1.55;">
                   1회 구매가 <strong>2,550원~5,440원</strong> 수준의 소포장 단일원물 간식(복슬강아지 무항생제 오리안심 4,590원, 말져키 5,440원, 네츄럴코어 비프치즈 2,970원)으로 5kg 소형견의 귀·눈물·변 상태와 입맛을 먼저 검증합니다.
                 </p>
               </div>
-              <div style="background:#070b14;border:1px solid rgba(56,189,248,0.4);border-radius:12px;padding:14px;">
+              <div style="background:#f0f9ff;border:1px solid #7dd3fc;border-radius:12px;padding:14px;">
                 <div style="color:var(--cyan);font-weight:800;font-size:14px;margin-bottom:4px;">STEP 2 · 다나와 오픈마켓 대용량(250g~1kg) 최저가 정착</div>
-                <p style="font-size:13px;color:#cbd5e1;">
+                <p style="font-size:13px;color:var(--body);line-height:1.55;">
                   안전하게 잘 먹는 주원료(황태·오리·고구마·가수분해껌)가 확인되면 다나와 최저가(벨버드 황태 1kg 15,220원, 마마쇼 오리 1kg 10,790원, 헬로도기 고구마 250g 2,500원)로 전환하여 <strong>10g당 단가를 1,155원 → 240원(약 79% 절감)</strong>으로 낮춥니다.
                 </p>
               </div>
             </div>
           </div>
-          <div style="font-size:12.5px;color:var(--emerald);font-weight:700;">
+          <div style="font-size:12.5px;color:var(--emerald);font-weight:800;">
             ✔ 다나와 오퍼 조회 결과 G마켓·옥션·11번가·SSG·오늘의집 무료배송 옵션을 활용하면 배송비 부담도 제거됩니다.
           </div>
         </div>
@@ -680,51 +713,51 @@
             <h3 style="margin-top:10px;">상위 랭킹 핵심 선정 이유</h3>
             <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px;">
               <thead>
-                <tr style="border-bottom:1px solid var(--border);color:var(--cyan);">
+                <tr style="border-bottom:2px solid var(--border);color:var(--cyan);">
                   <th style="padding:6px 4px;text-align:left;">순위 / 상품명</th>
                   <th style="padding:6px 4px;text-align:right;">최저가</th>
                   <th style="padding:6px 4px;text-align:right;">10g단가</th>
                   <th style="padding:6px 4px;text-align:right;">점수</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+              <tbody style="color:var(--body);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>1. 채널펫 고구마 오리말이 300g</strong></td>
                   <td style="padding:7px 4px;text-align:right;">9,350원</td>
                   <td style="padding:7px 4px;text-align:right;">312원</td>
                   <td style="padding:7px 4px;text-align:right;color:var(--emerald);font-weight:800;">85.4</td>
                 </tr>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>2. 벨버드 시간순삭 황태 큐브 1kg</strong></td>
                   <td style="padding:7px 4px;text-align:right;">15,220원</td>
                   <td style="padding:7px 4px;text-align:right;">152원</td>
                   <td style="padding:7px 4px;text-align:right;color:var(--emerald);font-weight:800;">83.1</td>
                 </tr>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>3. 헬로도기 말랑 고구마스틱 250g</strong></td>
                   <td style="padding:7px 4px;text-align:right;">2,500원</td>
                   <td style="padding:7px 4px;text-align:right;">100원</td>
                   <td style="padding:7px 4px;text-align:right;color:var(--emerald);font-weight:800;">82.4</td>
                 </tr>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>4. [복슬강아지] 무항생제 오리안심 40g</strong></td>
                   <td style="padding:7px 4px;text-align:right;">4,590원</td>
                   <td style="padding:7px 4px;text-align:right;">1,148원</td>
                   <td style="padding:7px 4px;text-align:right;color:var(--cyan);font-weight:800;">80.7</td>
                 </tr>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>5. 펫더맨 리얼 오리 연어포 300g</strong></td>
                   <td style="padding:7px 4px;text-align:right;">2,180원</td>
                   <td style="padding:7px 4px;text-align:right;">73원</td>
                   <td style="padding:7px 4px;text-align:right;color:var(--cyan);font-weight:800;">78.8</td>
                 </tr>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>6. 마마쇼 독 오리 말이 스틱 1kg</strong></td>
                   <td style="padding:7px 4px;text-align:right;">10,790원</td>
                   <td style="padding:7px 4px;text-align:right;">108원</td>
                   <td style="padding:7px 4px;text-align:right;color:var(--cyan);font-weight:800;">76.3</td>
                 </tr>
-                <tr style="border-bottom:1px solid rgba(148,163,184,0.1);">
+                <tr style="border-bottom:1px solid var(--border);">
                   <td style="padding:7px 4px;"><strong>7. 빈즈라이크 깨끗한 오리목뼈 500g</strong></td>
                   <td style="padding:7px 4px;text-align:right;">12,000원</td>
                   <td style="padding:7px 4px;text-align:right;">240원</td>
@@ -762,44 +795,44 @@
           <img src="assets/images/portfolio_treats.jpg" alt="4대 간식 포트폴리오 비주얼" class="img-frame" style="object-fit:cover;" />
         </div>
         <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div class="panel anim-item" style="border-top:3px solid var(--cyan);">
+          <div class="panel anim-item" style="border-top:4px solid var(--cyan);">
             <div>
               <span class="badge b-cyan">① 데일리 노즈워크·훈련 (어류 100%)</span>
               <h3 style="margin-top:8px;">벨버드 시간순삭 황태 큐브 1kg</h3>
-              <p style="font-size:12.8px;color:#cbd5e1;margin-top:6px;">
+              <p style="font-size:12.8px;color:var(--body);margin-top:6px;line-height:1.55;">
                 황태 100% 동결건조 한입 큐브. 가루 날림이 적고 입안에서 사르르 녹아 5kg 소형견 노즈워크 매트용으로 최고입니다.
               </p>
             </div>
             <div style="font-size:13px;font-weight:800;color:var(--cyan);">15,220원 (무료배송 · 10g당 152원)</div>
           </div>
 
-          <div class="panel anim-item" style="border-top:3px solid var(--emerald);">
+          <div class="panel anim-item" style="border-top:4px solid var(--emerald);">
             <div>
               <span class="badge b-emerald">② 최고 기호성 수제육포 (리뷰 1위)</span>
               <h3 style="margin-top:8px;">[복슬강아지] 무항생제 오리안심 & 채널펫 오리말이</h3>
-              <p style="font-size:12.8px;color:#cbd5e1;margin-top:6px;">
+              <p style="font-size:12.8px;color:var(--body);margin-top:6px;line-height:1.55;">
                 컬리 리뷰 9,999+건 1위 국내산 무항생제 오리안심(4,590원)과 다나와 1위 고구마 오리말이(9,350원). 결대로 쉽게 찢어집니다.
               </p>
             </div>
             <div style="font-size:13px;font-weight:800;color:var(--emerald);">4,590원 (컬리) / 9,350원 (다나와)</div>
           </div>
 
-          <div class="panel anim-item" style="border-top:3px solid var(--purple);">
+          <div class="panel anim-item" style="border-top:4px solid var(--purple);">
             <div>
               <span class="badge b-purple">③ 알러지 ZERO 치석케어 (가수분해)</span>
               <h3 style="margin-top:8px;">무마진 소프트 덴탈껌 바나나 (9g×30p)</h3>
-              <p style="font-size:12.8px;color:#cbd5e1;margin-top:6px;">
+              <p style="font-size:12.8px;color:var(--body);margin-top:6px;line-height:1.55;">
                 가수분해 단백질로 알러지 항원성을 제거하고, 개당 9g 소형견 사이즈와 말랑한 식감으로 치석과 구취를 동시에 잡습니다.
               </p>
             </div>
             <div style="font-size:13px;font-weight:800;color:var(--purple);">9,790원 (30개입 · 개당 326원)</div>
           </div>
 
-          <div class="panel anim-item" style="border-top:3px solid var(--amber);">
+          <div class="panel anim-item" style="border-top:4px solid var(--amber);">
             <div>
               <span class="badge b-amber">④ 닭·오리 교차 알러지까지 완전 차단</span>
               <h3 style="margin-top:8px;">[복슬강아지] 국내산 말져키 & [골드로니] 한우간</h3>
-              <p style="font-size:12.8px;color:#cbd5e1;margin-top:6px;">
+              <p style="font-size:12.8px;color:var(--body);margin-top:6px;line-height:1.55;">
                 가금류 전체에 민감하거나 눈물자국이 심한 소형견에게 가장 안전한 국내산 말고기 100%(5,440원) 및 한우간 100%(9,563원)입니다.
               </p>
             </div>
@@ -880,7 +913,7 @@
           <div>
             <span class="badge b-cyan">MORNING · 오전 산책 후 노즈워크</span>
             <h3 style="margin-top:10px;font-size:19px;">동결건조 황태/연어 큐브 5~6조각</h3>
-            <p style="font-size:13.5px;color:#cbd5e1;margin-top:8px;line-height:1.6;">
+            <p style="font-size:13.5px;color:var(--body);margin-top:8px;line-height:1.6;">
               • <strong>추천 상품</strong>: 벨버드 황태 큐브 1kg 또는 골드로니 연어 트릿<br/>
               • <strong>급여량</strong>: 약 3~4g (약 11~14 kcal)<br/>
               • <strong>효과</strong>: 저지방 고단백 어류 단일원물로 아침 공복 구토 예방 및 후각 스트레스 해소
@@ -893,7 +926,7 @@
           <div>
             <span class="badge b-emerald">AFTERNOON · 오후 칭찬·교감 타임</span>
             <h3 style="margin-top:10px;font-size:19px;">오리안심 육포 1/2장 또는 고구마스틱 1개</h3>
-            <p style="font-size:13.5px;color:#cbd5e1;margin-top:8px;line-height:1.6;">
+            <p style="font-size:13.5px;color:var(--body);margin-top:8px;line-height:1.6;">
               • <strong>추천 상품</strong>: 복슬강아지 무항생제 오리안심 / 채널펫 고구마 오리말이 / 헬로도기 고구마스틱<br/>
               • <strong>급여량</strong>: 약 4~5g (약 12~15 kcal)<br/>
               • <strong>효과</strong>: 손으로 작게 찢어 5~6회 나누어 급여하면 5kg 소형견의 만족감 극대화
@@ -906,7 +939,7 @@
           <div>
             <span class="badge b-purple">EVENING · 저녁 식후 양치 & 치석케어</span>
             <h3 style="margin-top:10px;font-size:19px;">가수분해 소프트 덴탈껌 S사이즈 1개</h3>
-            <p style="font-size:13.5px;color:#cbd5e1;margin-top:8px;line-height:1.6;">
+            <p style="font-size:13.5px;color:var(--body);margin-top:8px;line-height:1.6;">
               • <strong>추천 상품</strong>: 무마진 독 소프트 덴탈껌 바나나(9g) 또는 몰리스 오리 꽈배기껌<br/>
               • <strong>급여량</strong>: 1개 9g (약 12~14 kcal)<br/>
               • <strong>효과</strong>: 닭 알러지 걱정 없는 가수분해 단백질로 양치 후 보상 및 어금니 치석 관리
@@ -916,13 +949,13 @@
         </div>
       </div>
 
-      <div class="panel anim-item" style="margin-top:16px;flex:0 0 auto;flex-direction:row;align-items:center;justify-content:space-between;padding:16px 24px;background:linear-gradient(90deg,rgba(2,132,199,0.18),rgba(5,150,105,0.18));">
+      <div class="panel anim-item" style="margin-top:16px;flex:0 0 auto;flex-direction:row;align-items:center;justify-content:space-between;padding:16px 24px;background:linear-gradient(90deg,#e0f2fe,#d1fae5);border:1px solid #7dd3fc;">
         <div>
-          <strong style="font-size:16px;color:#fff;">🎯 최종 결론: 하루 약 530~830원(월 1.6만~2.5만원)으로 완성하는 5kg 소형견 무계육 프리미엄 간식 루틴</strong>
-          <div style="font-size:13px;color:#cbd5e1;margin-top:3px;">전체 원본 데이터(CSV), 주피터 노트북(.ipynb), 웹 대시보드(.html)가 모두 프로젝트에 함께 수록되어 있습니다.</div>
+          <strong style="font-size:16px;color:#0f172a;">🎯 최종 결론: 하루 약 530~830원(월 1.6만~2.5만원)으로 완성하는 5kg 소형견 무계육 프리미엄 간식 루틴</strong>
+          <div style="font-size:13px;color:#334155;margin-top:3px;">전체 원본 데이터(CSV), 주피터 노트북(.ipynb), 웹 대시보드(.html)가 모두 프로젝트에 함께 수록되어 있습니다.</div>
         </div>
         <div style="display:flex;gap:10px;">
-          <a class="ctrl-btn" href="dog_treats_dashboard.html" target="_blank" style="background:var(--cyan);color:#060a12;border:none;">웹 대시보드 열기</a>
+          <a class="ctrl-btn" href="dog_treats_dashboard.html" target="_blank" style="background:var(--cyan);color:#ffffff;border:none;">웹 대시보드 열기</a>
           <a class="ctrl-btn" href="dog_treats_no_chicken_candidates.csv" download>CSV 다운로드</a>
         </div>
       </div>
@@ -1059,16 +1092,16 @@
       sTableBody.innerHTML = list.map(d => `
         <tr>
           <td>#${d["번호"]}</td>
-          <td><strong style="color:#34d399;">${d["종합추천점수"].toFixed(1)}</strong></td>
+          <td><strong style="color:#059669;">${d["종합추천점수"].toFixed(1)}</strong></td>
           <td>${d["플랫폼"]}</td>
           <td>${d["단백질_그룹"].split("(")[0]}</td>
           <td><strong>${d["상품명"]}</strong> <span style="color:#64748b;">(${d["용량_구성"]})</span></td>
-          <td style="color:#38bdf8;">${d["주원료_단백질"]}</td>
+          <td style="color:#0284c7;font-weight:700;">${d["주원료_단백질"]}</td>
           <td>${d["안전등급_분류"]}</td>
           <td><strong>${d["최저가_할인가_원"].toLocaleString()}원</strong></td>
-          <td style="color:#fbbf24;font-weight:700;">${d["10g당_단가_원"].toLocaleString()}원</td>
+          <td style="color:#d97706;font-weight:800;">${d["10g당_단가_원"].toLocaleString()}원</td>
           <td>${d["인기도_리뷰_평점"]}</td>
-          <td style="max-width:260px;font-size:11.5px;color:#94a3b8;">${d["판매처별_가격비교"]}</td>
+          <td style="max-width:260px;font-size:11.5px;color:#475569;">${d["판매처별_가격비교"]}</td>
           <td><a class="ctrl-btn" style="padding:3px 8px;font-size:11px;" href="${d["상품_URL"]}" target="_blank">바로가기</a></td>
         </tr>
       `).join("");
